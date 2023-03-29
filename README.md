@@ -103,7 +103,7 @@ NB: You need to create an `env` file for your database credentials
 
 - GitHub: [@kennedyowusu](https://github.com/kennedyowusu)
 - Twitter: [@_amkobby](https://twitter.com/_iamkobby_)
-- LinkedIn: [Kennedy Owusu](www.linkedin.com/in/kennedy-owusu)
+- LinkedIn: [kennedy-owusu](www.linkedin.com/in/kennedy-owusu)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
