@@ -4,6 +4,8 @@ class Like < ApplicationRecord
   belongs_to :post, counter_cache: true
 
   validates :user, :post, presence: true
+  validates :user_id, uniqueness: { scope: :post_id }
+  validates :user_id, exclusion: { in: ->(like) { [like.post.author_id] } }
 
   after_create :increment_post_likes_counter
   after_destroy :decrement_post_likes_counter
