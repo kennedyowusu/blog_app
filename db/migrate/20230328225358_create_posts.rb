@@ -1,17 +1,13 @@
 class CreatePosts < ActiveRecord::Migration[7.0]
-  def up
+  def change
     create_table :posts do |t|
-      t.references :author, null: false, foreign_key: { to_table: :users }
-      t.string :title, null: false
-      t.text :text, null: false
+      t.references :author_id, null: false, foreign_key: true
+      t.string :title
+      t.text :text
       t.integer :comments_counter, default: 0, null: false
       t.integer :likes_counter, default: 0, null: false
 
       t.timestamps
-    end
-
-    unless index_exists?(:posts, :author_id)
-      add_index :posts, :author_id
     end
   end
 
@@ -19,3 +15,4 @@ class CreatePosts < ActiveRecord::Migration[7.0]
     drop_table :posts
   end
 end
+
