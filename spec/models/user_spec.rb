@@ -9,7 +9,8 @@ RSpec.describe User, type: :model do
   end
 
   it 'should return the recent posts' do
-    Post.create(author: subject, title: 'Testing Title', text: 'Testing Description', comments_counter: 0, likes_counter: 0)
+    Post.create(author: subject, title: 'Testing Title', text: 'Testing Description', comments_counter: 0,
+                likes_counter: 0)
     posts = subject.recent_posts
     expect(posts.length).to eq(1)
   end
@@ -24,8 +25,8 @@ RSpec.describe User, type: :model do
     expect(subject).to_not be_valid
   end
 
-  it "requires a user bio" do
-    user = User.new(name: "Kennedy Owusu", photo: "userphoto", posts_counter: 0)
+  it 'requires a user bio' do
+    user = User.new(name: 'Kennedy Owusu', photo: 'userphoto', posts_counter: 0)
     expect(user).to be_valid
   end
 
@@ -34,13 +35,14 @@ RSpec.describe User, type: :model do
     expect(user).to_not be_valid
   end
 
-  it "requires a user photo" do
-    user = User.new(name: "Kennedy Owusu", bio: "Learning to code", posts_counter: 0)
+  it 'requires a user photo' do
+    user = User.new(name: 'Kennedy Owusu', bio: 'Learning to code', posts_counter: 0)
     expect(user).to_not be_valid
   end
 
   it 'should return the recent posts' do
-    Post.create(author: subject, title: 'Testing Title', text: 'Testing Description', comments_counter: 0, likes_counter: 0)
+    Post.create(author: subject, title: 'Testing Title', text: 'Testing Description', comments_counter: 0,
+                likes_counter: 0)
     posts = subject.recent_posts
     expect(posts.length).to eq(1)
   end
@@ -51,7 +53,8 @@ RSpec.describe User, type: :model do
   end
 
   it 'should be able to create a post' do
-    post = subject.posts.create(title: 'Testing Title', text: 'Testing Description', comments_counter: 0, likes_counter: 0)
+    post = subject.posts.create(title: 'Testing Title', text: 'Testing Description', comments_counter: 0,
+                                likes_counter: 0)
     expect(post).to be_valid
   end
 
@@ -61,5 +64,4 @@ RSpec.describe User, type: :model do
     end
     expect(subject.posts.count).to eq(5)
   end
-
 end

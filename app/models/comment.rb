@@ -6,7 +6,7 @@ class Comment < ApplicationRecord
 
   validates :text, presence: true
   validates :text, length: { minimum: 1, maximum: 500 }
-  validates :text, format: { with: /\A[a-zA-Z0-9]+\z/, message: "only allows letters and numbers" }
+  validates :text, format: { with: /\A[a-zA-Z0-9]+\z/, message: 'only allows letters and numbers' }
 
   def update_comments_counter
     post.increment!(:comments_counter)

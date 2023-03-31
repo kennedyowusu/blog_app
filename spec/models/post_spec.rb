@@ -1,7 +1,7 @@
 require 'rails_helper'
-include Shoulda::Matchers::ActiveModel
 
 RSpec.describe Post, type: :model do
+  include Shoulda::Matchers::ActiveModel
   context 'validations' do
     it { is_expected.to validate_presence_of(:title) }
     it { is_expected.to validate_length_of(:title).is_at_most(250) }
@@ -81,5 +81,4 @@ RSpec.describe Post, type: :model do
   it 'returns recent comments' do
     expect(subject.recent_comments).to eq([])
   end
-
 end
