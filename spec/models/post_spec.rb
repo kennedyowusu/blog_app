@@ -11,10 +11,10 @@ RSpec.describe Post, type: :model do
     it { is_expected.to validate_numericality_of(:likes_counter).is_greater_than_or_equal_to(0) }
   end
 
-  testuser = User.create(name: 'sampleName', photo: 'www.google.com', bio: 'sample bio', posts_counter: 0)
+  testuser = User.create(name: 'Kennedy Owusu', photo: 'user-image', bio: 'user bio', posts_counter: 0)
 
   subject do
-    Post.new(author: testuser, title: 'sample content', text: 'Samplt post content', likes_counter: 0, comments_counter: 0)
+    Post.new(author: testuser, title: 'post title', text: 'post content', likes_counter: 0, comments_counter: 0)
   end
 
   before { subject.save }
