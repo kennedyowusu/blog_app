@@ -11,10 +11,5 @@ class User < ApplicationRecord
   def recent_posts(limit = 3)
     posts.order(created_at: :desc).limit(limit)
   end
-
-  def create_post(params)
-    post = posts.create(params)
-    post.save # save the post to the database
-    post # return the post object
-  end
+  
 end
