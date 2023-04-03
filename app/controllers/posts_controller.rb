@@ -6,5 +6,4 @@ class PostsController < ApplicationController
   def show
     # fetch single post using params[:id]
   end
-
 end
