@@ -6,5 +6,4 @@ class UsersController < ApplicationController
   def show
     # fetch single user using params[:id]
   end
-
 end

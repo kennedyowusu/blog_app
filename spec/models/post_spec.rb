@@ -14,7 +14,8 @@ RSpec.describe Post, type: :model do
   testuser = User.create(name: 'John Doe', photo: 'user-photo', bio: 'This is John Doe', posts_counter: 0)
 
   subject do
-    Post.new(author: testuser, title: 'New Post', text: 'ew Post Created For Testing', likes_counter: 0, comments_counter: 0)
+    Post.new(author: testuser, title: 'New Post', text: 'ew Post Created For Testing', likes_counter: 0,
+             comments_counter: 0)
   end
 
   before { subject.save }
