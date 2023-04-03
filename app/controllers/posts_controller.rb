@@ -7,7 +7,4 @@ class PostsController < ApplicationController
     # fetch single post using params[:id]
   end
 
-  def specific_user
-    # fetch post belonging to current user using params[:id]
-  end
 end
