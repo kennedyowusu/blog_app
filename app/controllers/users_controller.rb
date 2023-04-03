@@ -4,6 +4,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    # fetch single user using params[:id]
+    @user = User.find(params[:id]) || 'User not found'
   end
 end

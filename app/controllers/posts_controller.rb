@@ -4,6 +4,6 @@ class PostsController < ApplicationController
   end
 
   def show
-    # fetch single post using params[:id]
+    # fetch single post belonging to current user
   end
 end
