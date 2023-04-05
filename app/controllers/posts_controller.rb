@@ -1,9 +1,11 @@
 class PostsController < ApplicationController
   def index
-    # fetch all posts belonging to current user
+    @user = User.find(params[:user_id])
+    @posts = @user.posts
   end
 
   def show
-    # fetch single post belonging to current user
+    @post = Post.find(params[:id])
+    @user = User.find(params[:user_id])
   end
 end
