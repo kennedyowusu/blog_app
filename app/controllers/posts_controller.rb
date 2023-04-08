@@ -9,7 +9,6 @@ class PostsController < ApplicationController
     @posts = @user.posts.try(:order, created_at: :desc).try(:paginate, page: params[:page], per_page: 1) || []
   end
 
-
   def show
     @user = User.find(params[:user_id])
     @post = Post.find(params[:id])
