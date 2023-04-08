@@ -1,7 +1,7 @@
 class Like < ApplicationRecord
   belongs_to :author, class_name: 'User', foreign_key: 'author_id'
 
-  belongs_to :post, counter_cache: true
+  belongs_to :post, counter_cache: true, foreign_key: :post_id, class_name: 'Post'
 
   validates :user_id, :post, presence: true
   validates :user_id, uniqueness: { scope: :post_id }

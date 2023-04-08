@@ -1,1 +1,50 @@
-<h1>Display All Post</h1>
+<section>
+  <h1>List of Posts for spesfic User</h1>
+
+<div class="d-flex align-items-center mb-3 gap-3 text-secondary-emphasis w-100">
+  <div>
+    <img src="<%= @user.photo %>" alt="user photo" class= "border border-dark border-3 p-5">
+  </div>
+  <div class=" border border-dark border-3 w-100 p-3">
+    <h2 class="flex-grow-1 p-2"> <%= @user.name %></h2>
+    <div class="d-flex justify-content-end">
+      <p>Number of posts: <%= @user.posts_counter %></p>
+    </div>
+  </div>
+</div>
+
+<section>
+<% @user.recent_posts.each do |post| %>
+      <div class="border border-dark border-3 mx-auto w-100 p-3 mb-3 text-dark">
+      <h3><%= link_to post.title, "/users/#{@user.id}/posts/#{post.id}" %></h3>
+        <p><%= post.text %></p>
+
+        <<div class="d-flex justify-content-between">
+        <div>
+          <%= form_with url: "/likes/#{post.id}" do |form| %>
+            <%= form.submit "Like", class: "btn btn-outline-secondary"%>
+          <% end %>
+        </div>
+
+      </div>
+
+    <div class="border border-dark border-3 mx-auto w-100 p-3 mb-3">
+    <h4 class="mb-3">Comments</h4>
+    <% post.recent_comments.each do |comment| %>
+      <div class="mb-3">
+          <span><%= comment.author.name %>:</span>
+          <span> <%= comment.text %></span>
+      <% end %>
+    </div>
+  <% end %>
+
+
+</section>
+
+<div class="text-center mb-3">
+</div
+
+<div class="d-flex align-items-center justify-content-center p-3">
+</div>
+
+</section>

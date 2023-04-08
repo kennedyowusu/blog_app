@@ -1,7 +1,7 @@
 class User < ApplicationRecord
-  has_many :posts, foreign_key: 'author_id', dependent: :destroy
-  has_many :comments, foreign_key: 'author_id', dependent: :destroy
-  has_many :likes, foreign_key: 'author_id', dependent: :destroy
+  has_many :posts, foreign_key: 'author_id', dependent: :destroy, class_name: 'Post'
+  has_many :comments, foreign_key: 'author_id', dependent: :destroy, class_name: 'Comment'
+  has_many :likes, foreign_key: 'author_id', dependent: :destroy, class_name: 'Like'
 
   validates :name, presence: true
   validates :photo, presence: true
