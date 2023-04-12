@@ -1,49 +1,55 @@
-<section>
-  <h1>List of Posts for spesfic User</h1>
+<section class="specific">
 
-<div class="d-flex align-items-center mb-3 gap-3 text-secondary-emphasis w-100">
-  <div>
-    <img src="<%= @user.photo %>" alt="user photo" class= "border border-dark border-3 p-5">
-  </div>
-  <div class=" border border-dark border-3 w-100 p-3">
-    <h2 class="flex-grow-1 p-2"> <%= @user.name %></h2>
-    <div class="d-flex justify-content-end">
-      <p>Number of posts: <%= @user.posts_counter %></p>
+  <h1>List of Posts for a Specific User</h1>
+
+  <div class="specific-img-post">
+    <div class="specific-img">
+      <img src="<%= @user.photo %>" alt="user photo" class= "">
+    </div>
+    <div class=" border border-dark border-3 w-100 p-3">
+      <h2 class="flex-grow-1 p-2"> <%= @user.name %></h2>
+      <div class="d-flex justify-content-end">
+        <p>Number of posts: <%= @user.posts_counter %></p>
+      </div>
     </div>
   </div>
-</div>
 
-<section>
-<% @user.recent_posts.each do |post| %>
-      <div class="border border-dark border-3 mx-auto w-100 p-3 mb-3 text-dark">
-      <h3><%= link_to post.title, "/users/#{@user.id}/posts/#{post.id}" %></h3>
-        <p><%= post.text %></p>
+  <section class="specific-post-data">
+  <% @user.recent_posts.each do |post| %>
 
-        <div class="d-flex justify-content-between">
-        <div>
-          <%= form_with url: "/likes/#{post.id}" do |form| %>
-            <%= form.submit "Like", class: "btn btn-outline-secondary"%>
-          <% end %>
+    <div class="specific-post-container">
+      <h3 class="specific-post-title"><%= link_to post.title, "/users/#{@user.id}/posts/#{post.id}" %></h3>
+          <p class="specific-post-body"><%= post.text %></p>
+
+          <div class="likes-comments-container">
+
+            <div class="likes">
+              <%= form_with url: "/likes/#{post.id}" do |form| %>
+              <%# <span> <%= lke %></span>
+
+                <%# <%= form.submit "Like", class: ""%>
+
+              <% end %>
+            </div>
+
+            <div class="comment">
+            <h4 class="">Comments</h4>
+            <% post.recent_comments.each do |comment| %>
+              <div class="">
+                  <span><%= comment.author.name %>:</span>
+                  <span> <%= comment.text %></span>
+              <% end %>
+            </div>
+          </div>
+
         </div>
 
-      </div>
 
-    <div class="border border-dark border-3 mx-auto w-100 p-3 mb-3">
-    <h4 class="mb-3">Comments</h4>
-    <% post.recent_comments.each do |comment| %>
-      <div class="mb-3">
-          <span><%= comment.author.name %>:</span>
-          <span> <%= comment.text %></span>
-      <% end %>
+
     </div>
+
   <% end %>
 
-
-</section>
-
-<div class="text-center mb-4"></div
-
-<div class="d-flex align-items-center justify-content-center p-3">
-</div>
+  </section>
 
 </section>

@@ -74,3 +74,53 @@ body {
   border: 1px solid teal;
 }
 
+.specific {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.specific-img-post {
+  width: 50%;
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.specific-img {
+  height: 100px;
+  width: 200px;
+  border: 2px solid black;
+  margin-right: -20px;
+}
+
+.specific-post-data {
+  width: 48%;
+}
+
+.specific-post-container{
+  border: 2px solid black;
+  margin: 20px;
+}
+
+.specific-post-title {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: start;
+  margin-left: -10px;
+  margin-top: 10px;
+}
+
+.specific-post-body {
+  font: 16px;
+  margin-top: 20px;
+  margin-left: 28px;
+}
+
+.likes-comments-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 20px;
+}
