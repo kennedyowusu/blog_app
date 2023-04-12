@@ -1,14 +1,14 @@
-<section class="w-100 align-items-center" >
-    <% @users.each do |user| %>
-          <a href= <%= "users/#{user.id}"%> class="d-flex align-items-center m-3 gap-5 text-decoration-none text-dark">
-          <%= image_tag(user.photo, class: "border border-dark p-5 border-3")%>
-          <div class="border border-dark border-3 w-100  p-3">
-            <h2 class="flex-grow-1 text-decoration-none"> <%= user.name %></h2>
-            <div class="d-flex justify-content-end">
-              Number of posts:
-              <%= user.posts_counter || 0 %>
-            </div>
-            </div>
-          </a>
-    <% end %>
+<section class="w-100 flex flex-col align-items-center">
+  <% @users.each do |user| %>
+    <a href="<%= "users/#{user.id}" %>" class="flex flex-row items-center m-3 gap-0 text-decoration-none text-dark">
+      <%= image_tag(user.photo, class: "border border-dark p-5 border-3")%>
+      <div class="border border-dark border-3 w-100 p-4 max-w-xl">
+        <h2 class="flex-grow-1 text-decoration-none"><%= user.name %></h2>
+        <div class="flex justify-end">
+          Number of posts:
+          <%= user.posts_counter || 0 %>
+        </div>
+      </div>
+    </a>
+  <% end %>
 </section>
