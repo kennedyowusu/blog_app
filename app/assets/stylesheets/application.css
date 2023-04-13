@@ -237,6 +237,15 @@ body {
   margin-bottom: 20px;
 }
 
+.each-post-comments {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto 20px auto;
+}
+
 .add-comments {
   display: flex;
   flex-direction: column;
