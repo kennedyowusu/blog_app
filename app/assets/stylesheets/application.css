@@ -313,3 +313,11 @@ body {
   font-size: 14px;
   margin: 10px;
 }
+
+.create-post-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+}
