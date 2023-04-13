@@ -1,12 +1,16 @@
-Class CommentsController < ApplicationController
-def create
-  @comment = current_user.comments.new(comment_params)
-  @comment.post_id = params[:post_id]
-  if @comment.save
-    flash[:success] = 'Comment Created Successfully'
+class CommentsController < ApplicationController
+  def create
+    @comment = current_user.comments.new(comment_params)
+    @post = Post.find(params[:post_id])
+    @comment.post_id = @post.id
+    @comment.save
+    flash[:success] = 'Commented!'
     redirect_to "/users/#{current_user.id}/posts"
-  else
-    flash[:success] = 'Comment Not Created'
-    render :new, status: :unprocessable_entity
+  end
+
+  private
+
+  def comment_params
+    params.require(:comment).permit(:text)
   end
 end

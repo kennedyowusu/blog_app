@@ -1,3 +1,6 @@
+
+
+
 <h1 class="post-comments-title">Single post of a User</h1>
 
 <section>
@@ -25,9 +28,10 @@
 
   </div>
 
+
   <div class="comment-section">
     <h3>Comments:</h3>
-    <% @post.recent_comments.each do |comment| %>
+    <% @post.most_recent_comments.each do |comment| %>
       <div class="each-post-comments">
         <%= "#{comment.author.name}: #{comment.text}"%>
       </div>

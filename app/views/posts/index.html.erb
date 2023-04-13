@@ -15,7 +15,7 @@
   </div>
 
   <section class="specific-post-data">
-  <% @user.recent_posts.each do |post| %>
+  <% @user.most_recent_posts.each do |post| %>
 
     <div class="specific-post-container">
       <h3 class="specific-post-title"><%= link_to post.title, "/users/#{@user.id}/posts/#{post.id}" %></h3>
@@ -25,10 +25,13 @@
 
           <div class="comment">
             <% if post.comments.any? %>
-              <% post.recent_comments.each do |comment| %>
-                <div class="">
+              <% post.most_recent_comments.each do |comment| %>
+
+              <div class="recent-comment-for-posts">
                     <span>
-                      <p><%=comment.author.name%>: <%=comment.text[0..100]%>...</p>
+                      <p class="recent-comment-for-post">
+                        <%=comment.author.name%>: <%=comment.text[0..100]%>
+                      </p>
                     </span>
                     <span> <%= comment.text %></span>
                 </div>

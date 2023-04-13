@@ -298,3 +298,18 @@ body {
   width: 100%;
   margin: 0 auto 20px 10px;
 }
+
+.recent-comment-for-posts {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto 20px auto;
+  border: 1px solid black;
+}
+
+.recent-comment-for-post {
+  font-size: 14px;
+  margin: 10px;
+}
