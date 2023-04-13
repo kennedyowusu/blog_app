@@ -282,3 +282,19 @@ body {
   color: teal;
   border: 2px solid teal;
 }
+
+.post-n-comment-n-like {
+  display: flex;
+  margin-left: -30px;
+}
+
+.comment-like-counts {
+  display: flex;
+  justify-content: flex-end;
+  margin-left: 10px;
+}
+
+.comment-body {
+  width: 100%;
+  margin: 0 auto 20px 10px;
+}
