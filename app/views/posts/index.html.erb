@@ -1,1 +1,52 @@
-<h1>Display All Post</h1>
+<section class="specific">
+
+  <h1 class="specific-title">List of Posts for a Specific User</h1>
+
+  <div class="specific-img-post">
+    <div class="specific-img">
+      <img src="<%= @user.photo %>" alt="user photo" class= "specific-user-photo">
+    </div>
+    <div class="specific-user-content">
+      <h2 class="flex-grow-1 p-2"> <%= @user.name %></h2>
+      <div class="d-flex justify-content-end">
+        <p>Number of posts: <%= @user.posts_counter %></p>
+      </div>
+    </div>
+  </div>
+
+  <section class="specific-post-data">
+  <% @user.most_recent_posts.each do |post| %>
+
+    <div class="specific-post-container">
+      <h3 class="specific-post-title"><%= link_to post.title, "/users/#{@user.id}/posts/#{post.id}" %></h3>
+          <p class="specific-post-body"><%= post.text %></p>
+
+          <div class="likes-comments-container">
+
+          <div class="comment">
+            <% if post.comments.any? %>
+              <% post.most_recent_comments.each do |comment| %>
+
+              <div class="recent-comment-for-posts">
+                    <span>
+                      <p class="recent-comment-for-post">
+                        <%=comment.author.name%>: <%=comment.text[0..100]%>
+                      </p>
+                    </span>
+                    <span> <%= comment.text %></span>
+                </div>
+              <% end %>
+            <% else %>
+              <p>Comments: <%= post.comments_counter || 0%> Likes: <%= post.likes_counter || 0%></p>
+            <% end %>
+          </div>
+
+        </div>
+
+    </div>
+
+  <% end %>
+
+  </section>
+
+</section>

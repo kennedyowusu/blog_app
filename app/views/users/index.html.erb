@@ -1,1 +1,14 @@
-<h1>List All Users</h1>
+<section class="index-homepage">
+  <% @users.each do |user| %>
+    <a href= <%= "users/#{user.id}"%> class="d-flex align-items-center m-3 gap-0 text-decoration-none text-dark index-text-link">
+      <%= image_tag(user.photo, class: "index-user-photo")%>
+      <div class="index-user-data">
+        <h2 class="flex-grow-1 text-decoration-none"><%= user.name %></h2>
+        <div class="flex justify-end">
+          Number of posts:
+          <%= user.posts_counter || 0 %>
+        </div>
+      </div>
+    </a>
+  <% end %>
+</section>

@@ -1,14 +1,12 @@
 class Comment < ApplicationRecord
-  belongs_to :author, class_name: 'User', foreign_key: 'author_id'
-  belongs_to :post
+  belongs_to :author, foreign_key: :author_id, class_name: 'User'
+  belongs_to :post, foreign_key: :post_id, class_name: 'Post'
 
-  after_create :update_comments_counter
+  after_save :update_comment_counter
 
-  validates :text, presence: true
-  validates :text, length: { minimum: 1, maximum: 500 }
-  validates :text, format: { with: /\A[a-zA-Z0-9]+\z/, message: 'only allows letters and numbers' }
-
-  def update_comments_counter
+  def update_comment_counter
     post.increment!(:comments_counter)
   end
+
+  private :update_comment_counter
 end

@@ -1,1 +1,43 @@
-<h1>Display Single User</h1>
+<h1 class="single-tittle">Details of a User</h1>
+
+<div class="single">
+
+<div class="single-user-image-data">
+  <div class="single-user-image">
+    <img src="<%= @user.photo %>" alt="user photo" class="single-user-photo">
+  </div>
+  <div class="border-4 border-gray-800 w-full p-3 single-user-data">
+    <h2 class="flex-grow-1 p-2 text-gray-600 text-lg font-semibold single-user-data-title"> <%= @user.name %></h2>
+    <div class="flex justify-end text-gray-600 text-lg font-semibold">
+      <p>Number of posts: <%= @user.posts_counter || 0 %></p>
+    </div>
+  </div>
+</div>
+
+<div class="bio">
+  <h2 class="bio-title">Biography</h2>
+  <p class="bio-paragraph"><%= @user.bio %></p>
+</div>
+
+<div class="single-user-post">
+  <% @user.most_recent_posts.each do |post| %>
+    <div class="border-4 border-gray-800 mx-auto w-2/3 p-3 mb-3">
+      <h2 class="text-gray-600 text-lg font-semibold">Post #<%= post.id %></h2>
+      <p class="text-gray-600 text-base font-medium"><%= post.text %></p>
+
+      <div class="flex justify-end text-gray-600 text-lg font-semibold">
+        <span class="mr-4">Comments: <%= "#{post.comments_counter || 0 } "%></span>
+        <span>Likes: <%= "#{ post.likes_counter || 0 }"%></span>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="text-center">
+    <a href=<%= "/users/#{@user.id}/posts"%> class="all-post-button">
+      See All Posts
+    </a>
+  </div>
+
+</div>
+
+</div>

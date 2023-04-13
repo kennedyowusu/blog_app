@@ -1,0 +1,4 @@
+<div class="comment-container">
+  <% author = User.find_by(id: comment.author_id) %>
+  <p><%= author.name %>: <%= truncate(comment.text, length: 100) %>...</p>
+</div>

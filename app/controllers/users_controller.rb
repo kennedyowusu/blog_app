@@ -1,9 +1,10 @@
 class UsersController < ApplicationController
   def index
-    # fetch all users
+    @users = User.all
+    @current_user = current_user
   end
 
   def show
-    # fetch single user using params[:id]
+    @user = User.find(params[:id])
   end
 end
