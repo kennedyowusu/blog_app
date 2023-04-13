@@ -6,6 +6,7 @@ class CreateLikes < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
+    add_index :likes, [:author_id, :post_id]
   end
 
   def down
