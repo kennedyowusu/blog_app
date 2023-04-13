@@ -1,4 +1,4 @@
-<h1 class="text-2xl text-gray-600 mb-5 justify-end single-tittle">Details of a User</h1>
+<h1 class="single-tittle">Details of a User</h1>
 
 <div class="single">
 
@@ -15,11 +15,11 @@
 </div>
 
 <div class="bio">
-  <h2 class="text-gray-600 text-lg font-semibold">Biography</h2>
-  <p class="text-gray-600 text-base font-medium"><%= @user.bio %></p>
+  <h2 class="">Biography</h2>
+  <p class=""><%= @user.bio %></p>
 </div>
 
-<div class="flex flex-col items-center justify-center">
+<div class="single-user-post">
   <% @user.recent_posts.each do |post| %>
     <div class="border-4 border-gray-800 mx-auto w-2/3 p-3 mb-3">
       <h2 class="text-gray-600 text-lg font-semibold">Post #<%= post.id %></h2>
