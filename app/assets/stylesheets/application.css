@@ -97,6 +97,12 @@ body {
   padding: 10px;
 }
 
+.bio-paragraph {
+  font-size: 16px;
+  font-weight: 400;
+  margin-top: 10px;
+}
+
 .single-user-post {
   width: 93%;
   margin: 0 auto;
