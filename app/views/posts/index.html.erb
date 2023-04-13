@@ -23,26 +23,22 @@
 
           <div class="likes-comments-container">
 
-            <div class="likes">
-              Likes
-            </div>
-
           <div class="comment">
             <% if post.comments.any? %>
               <% post.recent_comments.each do |comment| %>
                 <div class="">
-                    <span><%= comment.author.name %>:</span>
+                    <span>
+                      <p><%=comment.author.name%>: <%=comment.text[0..100]%>...</p>
+                    </span>
                     <span> <%= comment.text %></span>
                 </div>
               <% end %>
             <% else %>
-              <div class="">Comments: 0</div>
+              <p>Comments: <%= post.comments_counter || 0%> Likes: <%= post.likes_counter || 0%></p>
             <% end %>
           </div>
 
         </div>
-
-
 
     </div>
 
