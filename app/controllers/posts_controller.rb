@@ -1,15 +1,11 @@
 class PostsController < ApplicationController
+  before_action :find_user, only: [:index, :show, :new, :create]
+
   def index
-    @user = User.find(params[:user_id])
-    @posts = if @user.posts.any?
-               @user.posts.order(created_at: :desc)
-             else
-               []
-             end
+    @posts = @user.posts.order(created_at: :desc)
   end
 
   def show
-    @user = User.find(params[:user_id])
     @post = Post.find(params[:id])
   end
 
@@ -18,10 +14,10 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = current_user.posts.new(post_params)
+    @post = @user.posts.new(post_params)
     if @post.save
       flash[:success] = 'Post created!'
-      redirect_to "/users/#{current_user.id}/posts"
+      redirect_to user_posts_path(@user)
     else
       flash[:danger] = 'Post not created!'
       render :new, status: :unprocessable_entity
@@ -29,6 +25,10 @@ class PostsController < ApplicationController
   end
 
   private
+
+  def find_user
+    @user = User.find(params[:user_id])
+  end
 
   def post_params
     params.require(:post).permit(:title, :text)
