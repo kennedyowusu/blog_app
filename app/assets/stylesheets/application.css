@@ -343,12 +343,35 @@ body {
   width: 100%;
 }
 
-.create-post-form-textarea {
+.post-title-message {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  width: 100%;
+  margin-left: 140px;
+  width: 60%;
+}
+
+.input-title {
+  border: 2px solid black;
+  margin: 20px;
+  padding: 6px;
+  font-size: 16px;
+}
+
+.input-title:focus {
+  outline: none;
+}
+
+.text-area {
+  border: 2px solid black;
+  height: 100px;
+  margin: 20px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.text-area:focus {
+  outline: none;
 }
 
 .new-post-title {
@@ -356,6 +379,18 @@ body {
   font-weight: bold;
   margin-bottom: 20px;
   text-align: center;
+}
+
+.form-label-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.form-label-text-area {
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: -80px;
 }
 
 .new-post {
@@ -383,11 +418,18 @@ body {
   border: 2px solid maroon;
 }
 
-.form-label {
+.new-post-btn {
+  margin: 20px auto 20px 160px;
   font-size: 16px;
   font-weight: bold;
-  margin-bottom: 10px;
-  text-align: start;
-  margin-left: -350px;
-  margin-top: 20px;
+  border: 1px solid #000;
+  padding: 10px 20px;
+  border-radius: 5px;
+  width: 56%;
+  text-align: center;
+}
+
+.new-post-btn:hover {
+  background-color: #000;
+  color: #fff;
 }
