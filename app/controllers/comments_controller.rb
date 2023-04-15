@@ -1,16 +1,15 @@
 class CommentsController < ApplicationController
-  def create
-    @comment = current_user.comments.new(comment_params)
+  def new
+    @user = current_user
     @post = Post.find(params[:post_id])
-    @comment.post_id = @post.id
-    @comment.save
-    flash[:success] = 'Commented!'
-    redirect_to "/users/#{current_user.id}/posts"
+    @comment = Comment.new
   end
 
-  private
-
-  def comment_params
-    params.require(:comment).permit(:text)
+  def create
+    @user = current_user
+    @post = Post.find(params[:post_id])
+    @comment = @post.comments.new(author: @user, post: @post, text: params[:comment][:text])
+    @comment.save
+    redirect_to user_post_path(@post.author, @post)
   end
 end
