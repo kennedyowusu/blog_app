@@ -494,8 +494,31 @@ body {
   display: flex;
   justify-content: start;
   align-items: center;
-  width: 100%;
-  margin: 0 auto 20px 200px;
+  width: 50%;
+  margin: 0 auto 20px 235px;
+  border: 1px solid black;
+  padding: 10px;
+}
+
+.single-see-all-post {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  margin: 0 auto 20px auto;
+  border: 2px solid black;
+  padding: 10px;
+  border-radius: 8px;
+  color: black;
+}
+
+.single-see-all-post:hover {
+  background-color: black;
+  color: white;
+}
+
+.single-see-all-post:hover a {
+  color: white;
 }
 
 .post-title-message-comment {
