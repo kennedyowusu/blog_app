@@ -459,7 +459,7 @@ body {
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin: 0 auto 20px auto;
+  margin: 10px auto 20px auto;
 }
 
 .single-post-title {
@@ -468,7 +468,7 @@ body {
   margin: 0 auto 10px 240px;
 }
 
-.single-post-text{
+.single-post-text {
   width: 100%;
   margin: 0 auto 20px 240px;
 }
@@ -495,7 +495,7 @@ body {
   justify-content: start;
   align-items: center;
   width: 50%;
-  margin: 0 auto 20px 235px;
+  margin: 10px auto 20px 235px;
   border: 1px solid black;
   padding: 10px;
 }
