@@ -1,14 +1,26 @@
-<%= content_tag :div, class: "container" do %>
+<div class="single-post-page">
+  <%= content_tag :div, class: "single-post-container" do %>
   <%= content_tag :div, class: "post-head" do %>
-    <h4><%= content_tag :span, "Post # #{@post.id} by  #{@user.name}" %></h4>
-    <%= content_tag :span, "Comments: #{@post.comments_counter} Likes: #{@post.likes_counter}" %>
+
+    <div class="single-post-header">
+      <h4><%= content_tag :span, "Post # #{@post.id} by  #{@user.name}" %></h4>
+      <%= content_tag :span, "Comments: #{@post.comments_counter} Likes: #{@post.likes_counter}" %>
+    </div>
+
   <% end %>
-  <h1><%= @post.title %></h1>
-  <%= @post.text %>
-  <%= render "likes/counter" %>
-  <ul class="comment">
+
+  <h1 class="single-post-title"><%= @post.title %></h1>
+  <p class="single-post-text">
+    <%= @post.text %>
+  </p>
+
+  <p class="single-post-like">
+    <%= render "likes/counter" %>
+  </p>
+
+  <ul class="single-post-comment">
     <% @post.comments.each do |comment| %>
-      <li>
+      <li class="single-post-comment-item">
         <%= content_tag :span, "#{comment.author.name} : #{comment.text}" %>
       </li>
     <% end %>
@@ -18,4 +30,5 @@
     <%= link_to "Create new comment", new_user_post_comment_path(@user, @post) %>
 </button>
   <% end %>
+</div>
 
