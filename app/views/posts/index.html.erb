@@ -6,9 +6,9 @@
 				<%= render post %>
 				<ul class="bio">
 					<% post.recent_comments.each do |comment| %>
-            <li>
-              <%= content_tag :span, "#{comment.author.name} : #{comment.text}" %>
-            </li>
+									<li>
+											<%= content_tag :span, "#{comment.author.name} : #{comment.text}" %>
+									</li>
 						<% end %>
 				</ul>
 			</li>
