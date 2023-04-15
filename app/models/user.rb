@@ -7,10 +7,10 @@ class User < ApplicationRecord
   has_many :likes, foreign_key: 'author_id'
 
   def posts_counter
-    posts.count
+    @posts_counter ||= posts.size
   end
 
-  def recent_posts()
+  def recent_posts
     posts.where(author: self).order(created_at: :desc).limit(3)
   end
 end
