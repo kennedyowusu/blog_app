@@ -4,13 +4,9 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.string :name
       t.string :photo
       t.text :bio
-      t.integer :posts_counter, default: 0
-
+      t.integer :posts_counter
+      t.index :photo
       t.timestamps
     end
-  end
-
-  def down
-    drop_table :users
   end
 end

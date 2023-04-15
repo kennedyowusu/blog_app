@@ -1,16 +1,23 @@
-<h1>Create new post</h1>
+<section class="new-post">
+  <h2 class="new-post-title">New Post</h2>
+  <% if @post.errors.any? %>
+    <div class="error-message">
+      <% @post.errors.full_messages.each do |message| %>
+      <p><%= message %></p>
+      <% end %>
+    </div>
+  <% end %>
 
-<%= form_with model: @post do |form| %>
+  <div class="post-title-message">
+    <%= form_with model: @post, url: user_posts_path(@user) do |form| %>
+    <div class="post-title-message">
+      <%= form.text_field :title, required: true, autofocus: true, class: "input-title", placeholder: "Enter your title" %>
+    </div>
 
-  <div class="mb-3">
-    <%= form.label :Title, class: "form-label" %>
-    <%= form.text_field :title, placeholder: "post title", class: "form-control"  %>
+    <div class="post-title-message">
+      <%= form.text_area :text, required: true, autofocus: true, class: "text-area", placeholder: "Enter your text here" %>
+    </div>
+    <%= form.submit "Submit Post", class: "new-post-btn" %>
+  <% end %>
   </div>
-  <div class="mb-3">
-    <%= form.label :text, class: "form-label" %>
-    <%= form.text_area :text, placeholder: "post text...", class: "form-control form-control-lg" %>
-  </div>
-  <div>
-    <%= form.submit "Create Post", class: "btn btn-outline-secondary" %>
-  </div>
-<% end %>
+</section>

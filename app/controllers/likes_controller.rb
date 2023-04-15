@@ -1,16 +1,9 @@
 class LikesController < ApplicationController
-  before_action :find_post, only: %i[create destroy]
-
   def create
-    @like = @post.likes.new(user: current_user)
-    @like.save
-    flash[:success] = 'Liked!'
-    redirect_to user_posts_path(current_user)
-  end
-
-  private
-
-  def find_post
-    @post = Post.find(params[:post_id])
+    @user = current_user
+    @post = Post.find_by(id: params[:post_id])
+    @like = @post.likes.build(author: @user)
+    @like.save!
+    redirect_back(fallback_location: root_path)
   end
 end

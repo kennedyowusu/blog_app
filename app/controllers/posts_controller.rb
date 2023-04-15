@@ -1,33 +1,40 @@
 class PostsController < ApplicationController
-  before_action :find_user, only: %i[index show new create]
+  before_action :set_user, except: [:create]
+  before_action :set_post, only: %i[show edit update destroy]
 
   def index
-    @posts = @user.posts.order(created_at: :desc)
+    @posts = @user.posts
   end
 
   def show
-    @post = Post.find(params[:id])
+    @comments = @post.comments
+    @likes = @post.likes
   end
 
   def new
-    @post = Post.new
+    @post = @user.posts.new
   end
 
   def create
-    @post = @user.posts.new(post_params)
+    @post = current_user.posts.new(post_params)
+
     if @post.save
-      flash[:success] = 'Post created!'
-      redirect_to user_posts_path(@user)
+      flash[:notice] = 'Post created successfully'
+      redirect_to user_post_path(current_user, @post)
     else
-      flash[:danger] = 'Post not created!'
-      render :new, status: :unprocessable_entity
+      flash.alert = 'Post Not Created!'
+      render :new
     end
   end
 
   private
 
-  def find_user
+  def set_user
     @user = User.find(params[:user_id])
+  end
+
+  def set_post
+    @post = @user.posts.find(params[:id])
   end
 
   def post_params

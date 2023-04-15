@@ -4,15 +4,9 @@ class CreatePosts < ActiveRecord::Migration[7.0]
       t.references :author, foreign_key: { to_table: :users }
       t.string :title
       t.text :text
-      t.integer :comments_counter, default: 0
-      t.integer :likes_counter, default: 0
-
+      t.integer :comments_counter
+      t.integer :likes_counter
       t.timestamps
     end
   end
-
-  def down
-    drop_table :posts
-  end
 end
-
