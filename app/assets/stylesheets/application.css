@@ -15,7 +15,6 @@ body {
 
 .index-homepage {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -26,18 +25,32 @@ body {
 }
 
 .index-user-photo {
-  height: 90px;
-  width: 180px;
-  border: 2px solid black;
+  height: 115px;
+  width: 100px;
+  border: 3px solid black;
   margin-right: -20px;
 }
 
 .index-user-data {
   display: flex;
   flex-direction: column;
-  width: 120%;
+  width: 30%;
   border: 2px solid black;
   padding: 20px;
+}
+
+.user_name {
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
+}
+
+.number_of_post {
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 10px;
+  margin-top: 20px;
+  text-align: end;
 }
 
 .single {
