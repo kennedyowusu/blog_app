@@ -1,28 +1,19 @@
-<section>
-
-  <div class="single">
+<div class="container">
   <%= render @user %>
 
-  <div class="bio">
-    <h3 class="bio-title">Bio</h3>
-    <%= @user.bio%>
-  </div>
-
   <ul>
-  <% @user.recent_posts.each do |post| %>
-    <li>
-      <%= render post %>
-    </li>
+    <% @posts.each do |post| %>
+      <li class="item">
+        <%= render post %>
+
+        <ul class="bio">
+          <% post.recent_comments.each do |comment| %>
+            <li>
+              <%= render comment %>
+            </li>
+          <% end %>
+        </ul>
+      </li>
     <% end %>
   </ul>
-
-  <button class="all-post-button"><%= link_to "See all posts", user_posts_path(@user) %></button>
-
-  <button class="new-post-button">
-    <%= link_to "Create post", new_user_post_path(@user) %>
-  </button>
-
 </div>
-
-
-</section>

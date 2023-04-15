@@ -19,16 +19,13 @@
   </p>
 
   <ul class="single-post-comment">
-    <% @post.comments.each do |comment| %>
-      <li class="single-post-comment-item">
-        <%= content_tag :span, "#{comment.author.name} : #{comment.text}" %>
-      </li>
-    <% end %>
-  </ul>
+  <%= content_tag_for :li, @post.comments, class: "single-post-comment-item" do |comment| %>
+    <%= content_tag :span, "#{comment.author.name} : #{comment.text}" %>
+  <% end %>
+</ul>
 
-  <button class="single-see-all-post">
-    <%= link_to "Create new comment", new_user_post_comment_path(@user, @post) %>
-</button>
+  <%= link_to "Create new comment", new_user_post_comment_path(@user, @post), class: "single-see-all-post" %>
+
   <% end %>
 </div>
 
