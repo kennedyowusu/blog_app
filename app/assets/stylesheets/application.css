@@ -497,3 +497,41 @@ body {
   width: 100%;
   margin: 0 auto 20px 200px;
 }
+
+.post-title-message-comment {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.form-input-comment {
+  border: 2px solid black;
+  height: 100px;
+  margin: 20px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.form-input-comment:focus {
+  outline: none;
+}
+
+.form-button-comment {
+  padding: 8px 30px;
+  margin-top: 20px;
+  margin-left: 60px;
+  background-color: maroon;
+  color: black;
+  border-radius: 5px;
+  border: 2px solid maroon;
+  text-align: center;
+  width: 90%;
+}
+
+.form-button-comment:hover {
+  background-color: black;
+  font-weight: bold;
+  color: white;
+  border: 2px solid black;
+}
