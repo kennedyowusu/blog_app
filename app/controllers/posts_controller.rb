@@ -1,31 +1,43 @@
 class PostsController < ApplicationController
+  before_action :set_user, except: [:create]
+  before_action :set_post, only: [:show, :edit, :update, :destroy]
+
   def index
-    @user = User.find(params[:user_id])
-    @posts = Post.where(author_id: params[:user_id])
+    @posts = @user.posts
   end
 
   def show
-    @user = User.find(params[:user_id])
-    @post = @user.posts.find(params[:id])
     @comments = @post.comments
     @likes = @post.likes
   end
 
   def new
-    @user = current_user
-    @post = Post.new
+    @post = @user.posts.new
   end
 
   def create
-    @user = current_user
-    @post = @user.posts.new(author: @user, title: params[:post][:title], text: params[:post][:text])
+    @post = current_user.posts.new(post_params)
 
     if @post.save
-      flash[:notice] = 'Your post has been created successfully'
-      redirect_to user_post_path(@user, @post)
+      flash[:notice] = 'Post created successfully'
+      redirect_to user_post_path(current_user, @post)
     else
-      flash.alert = 'Sorry, something went wrong!'
+      flash.alert = 'Post Not Created!'
       render :new
     end
+  end
+
+  private
+
+  def set_user
+    @user = User.find(params[:user_id])
+  end
+
+  def set_post
+    @post = @user.posts.find(params[:id])
+  end
+
+  def post_params
+    params.require(:post).permit(:title, :text)
   end
 end
