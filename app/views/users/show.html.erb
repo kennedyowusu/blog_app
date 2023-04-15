@@ -1,10 +1,13 @@
-<div class="container">
+<section>
+
+  <div class="single">
   <%= render @user %>
 
   <div class="bio">
-    <h3>Bio</h3>
+    <h3 class="bio-title">Bio</h3>
     <%= @user.bio%>
   </div>
+
   <ul>
   <% @user.recent_posts.each do |post| %>
     <li>
@@ -13,8 +16,13 @@
     <% end %>
   </ul>
 
-  <button><%= link_to "See all posts", user_posts_path(@user) %></button>
-  <button class="see-all-post d-flex border">
+  <button class="all-post-button"><%= link_to "See all posts", user_posts_path(@user) %></button>
+
+  <button class="new-post-button">
     <%= link_to "Create post", new_user_post_path(@user) %>
   </button>
+
 </div>
+
+
+</section>
