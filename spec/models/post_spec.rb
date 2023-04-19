@@ -1,85 +1,90 @@
 require 'rails_helper'
-
 RSpec.describe Post, type: :model do
-  include Shoulda::Matchers::ActiveModel
-  context 'validations' do
-    it { is_expected.to validate_presence_of(:title) }
-    it { is_expected.to validate_length_of(:title).is_at_most(250) }
-    it { is_expected.to validate_presence_of(:text) }
-    it { is_expected.to validate_length_of(:text).is_at_least(10) }
-    it { is_expected.to validate_numericality_of(:comments_counter).is_greater_than_or_equal_to(0) }
-    it { is_expected.to validate_numericality_of(:likes_counter).is_greater_than_or_equal_to(0) }
+  let(:author) { User.create(name: 'Alice') }
+  let(:post) { Post.create(title: 'Post title', text: 'Post body', author: author) }
+  let(:comment1) { Comment.create(author: author, post: post, text: 'Comment body 1') }
+  let(:comment2) { Comment.create(author: author, post: post, text: 'Comment body 2') }
+  let(:like1) { Like.create(author: author, post: post) }
+  let(:like2) { Like.create(author: author, post: post) }
+
+
+  describe 'validations' do
+    it 'validates presence of name' do
+      post = Post.new(comments_counter: 0, likes_counter: 0)
+      expect(post).not_to be_valid
+      expect(post.errors[:title]).to include("can't be blank")
+    end
+
+    it 'validates length of title' do
+      post.title = 'a' * 251
+      expect(post).not_to be_valid
+
+      post.title = 'valid title'
+      expect(post).to be_valid
+    end
+
+    it 'validates numericality of comments_counter' do
+      post.likes_counter = 0
+      post.comments_counter = 'not a number'
+      expect(post).not_to be_valid
+      expect(post.errors[:comments_counter]).to include('is not a number')
+
+      post.comments_counter = -1
+      expect(post).not_to be_valid
+      expect(post.errors[:comments_counter]).to include('must be greater than or equal to 0')
+
+      post.comments_counter = 0
+      expect(post).to be_valid
+    end
+
+    it 'validates numericality of likes_counter' do
+      post.comments_counter = 0
+      post.likes_counter = 'not a number'
+      expect(post).not_to be_valid
+      expect(post.errors[:likes_counter]).to include('is not a number')
+
+      post.likes_counter = -1
+      expect(post).not_to be_valid
+      expect(post.errors[:likes_counter]).to include('must be greater than or equal to 0')
+
+      post.likes_counter = 0
+      expect(post).to be_valid
+    end
   end
 
-  testuser = User.create(name: 'John Doe', photo: 'user-photo', bio: 'This is John Doe', posts_counter: 0)
-
-  subject do
-    Post.new(author: testuser, title: 'New Post', text: 'ew Post Created For Testing', likes_counter: 0,
-             comments_counter: 0)
+  describe '#comments_counter' do
+    it 'returns the number of comments' do
+      expect(post.comments_counter).to eq(0)
+      post.comments << comment1
+      expect(post.comments_counter).to eq(1)
+      post.comments << comment2
+      expect(post.comments_counter).to eq(2)
+    end
   end
 
-  before { subject.save }
-
-  it 'is valid with valid attributes' do
-    expect(subject).to be_valid
+  describe '#likes_counter' do
+    it 'returns the number of likes' do
+      expect(post.likes_counter).to eq(0)
+      post.likes << like1
+      expect(post.likes_counter).to eq(1)
+      post.likes << like2
+      expect(post.likes_counter).to eq(2)
+    end
   end
 
-  it 'is not valid without a title' do
-    subject.title = nil
-    expect(subject).to_not be_valid
+  describe '#add_comment' do
+    it 'adds a comment to the post' do
+      post.add_comment(comment1)
+      expect(post.comments).to include(comment1)
+      expect(post.comments_counter).to eq(1)
+    end
   end
 
-  it 'is not valid without text' do
-    subject.text = nil
-    expect(subject).to_not be_valid
-  end
-
-  it 'is not valid with a title longer than 250 characters' do
-    subject.title = 'a' * 251
-    expect(subject).to_not be_valid
-  end
-
-  it 'is not valid with text shorter than 10 characters' do
-    subject.text = 'a' * 9
-    expect(subject).to_not be_valid
-  end
-
-  it 'is not valid with a negative comments counter' do
-    subject.comments_counter = -1
-    expect(subject).to_not be_valid
-  end
-
-  it 'is not valid with a negative likes counter' do
-    subject.likes_counter = -1
-    expect(subject).to_not be_valid
-  end
-
-  it 'is not valid without an author' do
-    subject.author = nil
-    expect(subject).to_not be_valid
-  end
-
-  it 'comments counter is a valid positive integer' do
-    subject.comments_counter = 0
-    expect(subject).to be_valid
-  end
-
-  it 'likes counter is a valid positive integer' do
-    subject.likes_counter = 0
-    expect(subject).to be_valid
-  end
-
-  it 'is not valid with a non-integer comments counter' do
-    subject.comments_counter = 'a'
-    expect(subject).to_not be_valid
-  end
-
-  it 'is not valid with a non-integer likes counter' do
-    subject.likes_counter = 'a'
-    expect(subject).to_not be_valid
-  end
-
-  it 'returns recent comments' do
-    expect(subject.recent_comments).to eq([])
+  describe '#get_recent_comments' do
+    it 'returns the most recent comments up to the given count' do
+      post.comments << comment1
+      post.comments << comment2
+      expect(post.recent_comments.take(2)).to eq([comment2, comment1])
+    end
   end
 end

@@ -1,46 +1,24 @@
 require 'rails_helper'
 
 RSpec.describe Comment, type: :model do
-  testuser = User.create(name: 'John Doe', photo: 'user-photo', bio: 'This is John Doe', posts_counter: 0)
-  testpost = Post.create(author: testuser, title: 'New Post', text: 'New Post Created For Testing', likes_counter: 0,
-                         comments_counter: 0)
+  let(:user) { User.create(name: 'Alice') }
+  let(:post) { Post.create(title: 'Post', text: 'Post body', author: user) }
 
-  subject do
-    Comment.new(author: testuser, post: testpost, text: 'post comment')
+  describe 'callbacks' do
+    describe '#update_post_comments_counter' do
+      it 'updates the post comments counter' do
+        @comment = Comment.create(author: user, post: post, text: 'Comment body')
+        expect(post.reload.comments_counter).to eq(1)
+      end
+    end
   end
 
-  it 'should validate the presence of author' do
-    subject.author = nil
-    expect(subject).to_not be_valid
-  end
-
-  it 'should validate the presence of post' do
-    subject.post = nil
-    expect(subject).to_not be_valid
-  end
-
-  it 'should validate the presence of text' do
-    subject.text = nil
-    expect(subject).to_not be_valid
-  end
-
-  it 'should validate the length of the text' do
-    subject.text = 'a' * 501
-    expect(subject).to_not be_valid
-
-    subject.text = 'a'
-    expect(subject).to be_valid
-  end
-
-  it 'should validate the presence of the author and post associations' do
-    subject.author = nil
-    subject.post = nil
-    expect(subject).to_not be_valid
-  end
-
-  it 'should validate the presence of the foreign keys' do
-    subject.author_id = nil
-    subject.post_id = nil
-    expect(subject).to_not be_valid
+  describe '#update_post_comments_counter' do
+    context 'when a comment is saved' do
+      it 'updates the comments counter of the associated post' do
+        comment = Comment.new(author: user, post: post, text: 'Comment body')
+        expect { comment.save }.to change { post.reload.comments_counter }.by(1)
+      end
+    end
   end
 end

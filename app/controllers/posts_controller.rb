@@ -1,9 +1,8 @@
 class PostsController < ApplicationController
-  before_action :set_user, except: [:create]
-  before_action :set_post, only: %i[show edit update destroy]
 
   def index
-    @posts = @user.posts
+    @user = User.find(params[:user_id])
+    @posts = Post.where(author_id: params[:user_id])
   end
 
   def show
@@ -14,32 +13,20 @@ class PostsController < ApplicationController
   end
 
   def new
-    @post = @user.posts.new
+    @user = current_user
+    @post = Post.new
   end
 
   def create
-    @post = current_user.posts.new(post_params)
+    @user = current_user
+    @post = @user.posts.new(author: @user, title: params[:post][:title], text: params[:post][:text])
 
     if @post.save
-      flash[:notice] = 'Post created successfully'
-      redirect_to user_post_path(current_user, @post)
+      flash[:notice] = 'Your post has been created successfully'
+      redirect_to user_post_path(@user, @post)
     else
-      flash.alert = 'Post Not Created!'
+      flash.alert = 'Sorry, something went wrong!'
       render :new
     end
-  end
-
-  private
-
-  def set_user
-    @user = User.find(params[:user_id])
-  end
-
-  def set_post
-    @post = @user.posts.find(params[:id])
-  end
-
-  def post_params
-    params.require(:post).permit(:title, :text)
   end
 end

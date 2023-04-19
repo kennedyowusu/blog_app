@@ -2,10 +2,11 @@ require 'rails_helper'
 
 RSpec.describe 'User show', type: :feature do
   before :each do
-    @user1 = User.create(id: 5, name: 'Owusu', photo: 'https://picsum.photos/seed/picsum/200/300',
-                         bio: 'Learning To Code', posts_counter: 12)
-    @post1 = Post.create(id: 1, author: @user1, title: 'New Post', text: 'This is a new post')
-    @post2 = Post.create(author: @user1, title: 'New Post Again', text: 'This is another new post')
+    @user1 = User.create(name: 'Ali', photo: 'https://picsum.photos/300/200',
+                         bio: 'Software Engineer from Pakistan', posts_counter: 12)
+    @post1 = Post.create(author: @user1, title: 'Title 1', text: 'This is my first post')
+    @post2 = Post.create(author: @user1, title: 'Title 2', text: 'This is my second post')
+    @post3 = Post.create(author: @user1, title: 'Title 3', text: 'This is my third post')
     visit user_path(@user1.id)
   end
 
@@ -28,6 +29,7 @@ RSpec.describe 'User show', type: :feature do
   it 'Should render the last 3 posts' do
     expect(page).to have_content(@post1.title)
     expect(page).to have_content(@post2.title)
+    expect(page).to have_content(@post3.title)
   end
 
   it 'I can see the button that lets me view all the posts' do
