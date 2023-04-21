@@ -1,5 +1,5 @@
 require 'rails_helper'
-​
+
 RSpec.describe 'root page features' do
   before(:each) do
     @users = [
@@ -14,7 +14,7 @@ RSpec.describe 'root page features' do
         bio: 'Teacher from Poland.', posts_counter: 0
       )
     ]
-    ​
+
     @posts = [
       @post1 = Post.create(
         author: @user1,
@@ -31,10 +31,10 @@ RSpec.describe 'root page features' do
         likes_counter: 0
       )
     ]
-    ​
+
     visit user_post_path(@users.first, @posts.first)
   end
-  ​
+
   describe '#PostShowPage' do
     it 'Should display post title' do
       expect(page).to have_content(@post1.title)
