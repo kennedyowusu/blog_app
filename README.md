@@ -105,6 +105,13 @@ NB: You need to create an `env` file for your database credentials
 - Twitter: [@_amkobby](https://twitter.com/_iamkobby_)
 - LinkedIn: [kennedy-owusu](www.linkedin.com/in/kennedy-owusu)
 
+
+
+👤 **Tarik Bouari**
+
+- GitHub: [@kennedyowusu](https://github.com/tarikbouari)
+- Twitter: [@tarikbouari](https://twitter.com/tarikbouari)
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- FUTURE FEATURES -->
