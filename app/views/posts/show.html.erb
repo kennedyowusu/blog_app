@@ -1,31 +1,32 @@
-<div class="single-post-page">
-  <%= content_tag :div, class: "single-post-container" do %>
-  <%= content_tag :div, class: "post-head" do %>
+<h1>Show a particular post</h1>
 
-    <div class="single-post-header">
-      <h4><%= content_tag :span, "Post # #{@post.id} by  #{@user.name}" %></h4>
-      <%= content_tag :span, "Comments: #{@post.comments_counter} Likes: #{@post.likes_counter}" %>
-    </div>
+<div class= "user-details gap" >
+            <div class="post">
+                <div>
+                    <h4> Post #<%= @post.id %> <%= @post.title %> by <%= @user.name %> </h4>
+                    <%= @post.text%>
+                    <h6>Comments:<%= @post.comments_counter %>, Likes:<%= @post.likes_counter %> </h6>
+                </div>
 
-  <% end %>
+                <div>
+                    <%= form_with model: @like, url:  user_post_likes_path(@user, @post) do |form|%>
+                        <%= form.submit 'Like post', class: 'submit' %>
+                    <%end%>
+                </div>
 
-  <h1 class="single-post-title"><%= @post.title %></h1>
-  <p class="single-post-text">
-    <%= @post.text %>
-  </p>
+                <div class="post-comments">
+                    <h4> Comments </h4>
+                    <% @post.comments.each do |comment| %>
+                        <p>
+                            <strong><%= comment.author.name %>:</strong>
+                            <span><%= comment.text %></span>
+                        </p>
+                    <%end%>
+                </div>
+            </div>
 
-  <p class="single-post-like">
-    <%= render "likes/counter" %>
-  </p>
+            <button class="see-all-post d-flex border">
+                <%= link_to "Create new comment", new_user_post_comment_path(@user, @post) %>
+            </button>
 
-  <ul class="single-post-comment">
-  <%= content_tag_for :li, @post.comments, class: "single-post-comment-item" do |comment| %>
-    <%= content_tag :span, "#{comment.author.name} : #{comment.text}" %>
-  <% end %>
-</ul>
-
-  <%= link_to "Create new comment", new_user_post_comment_path(@user, @post), class: "single-see-all-post" %>
-
-  <% end %>
 </div>
-

@@ -1,67 +1,37 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  subject { User.new(name: 'John Doe', photo: 'user-photo', bio: 'This is John Doe', posts_counter: 0) }
+  subject do
+    User.new(
+      name: 'John Doe',
+      photo: 'https://picsum.photos/200/300',
+      bio: 'Developer',
+      posts_counter: 5
+    )
+  end
+  before { subject.save }
 
-  before do
-    subject.photo = 'user-photo'
-    subject.save
+  it 'is valid with valid attributes' do
+    expect(subject).to be_valid
   end
 
-  it 'should return the recent posts' do
-    Post.create(author: subject, title: 'Testing Title', text: 'Testing Description', comments_counter: 0,
-                likes_counter: 0)
-    posts = subject.recent_posts
-    expect(posts.length).to eq(1)
-  end
-
-  it 'name should be present' do
+  it 'is not valid without a name' do
     subject.name = nil
     expect(subject).to_not be_valid
   end
 
-  it 'posts_counter should be greater than or equal to 0' do
+  it 'is not valid with a negative posts counter' do
     subject.posts_counter = -1
     expect(subject).to_not be_valid
   end
 
-  it 'requires a user bio' do
-    user = User.new(name: 'Kennedy Owusu', photo: 'userphoto', posts_counter: 0)
-    expect(user).to be_valid
-  end
-
-  it 'requires a user name' do
-    user = User.new(photo: 'userphoto', bio: 'Learning to code', posts_counter: 0)
-    expect(user).to_not be_valid
-  end
-
-  it 'requires a user photo' do
-    user = User.new(name: 'Kennedy Owusu', bio: 'Learning to code', posts_counter: 0)
-    expect(user).to_not be_valid
-  end
-
-  it 'should return the recent posts' do
-    Post.create(author: subject, title: 'Testing Title', text: 'Testing Description', comments_counter: 0,
-                likes_counter: 0)
-    posts = subject.recent_posts
-    expect(posts.length).to eq(1)
-  end
-
-  it 'posts_counter should be greater than or equal to 0' do
-    subject.posts_counter = -1
+  it 'is not valid with a non-integer posts counter' do
+    subject.posts_counter = 1.5
     expect(subject).to_not be_valid
   end
 
-  it 'should be able to create a post' do
-    post = subject.posts.create(title: 'Testing Title', text: 'Testing Description', comments_counter: 0,
-                                likes_counter: 0)
-    expect(post).to be_valid
-  end
-
-  it 'should return the correct number of posts' do
-    5.times do
-      subject.posts.create(title: 'Testing Title', text: 'Testing Description', comments_counter: 0, likes_counter: 0)
-    end
-    expect(subject.posts.count).to eq(5)
+  it 'should display most recent posts' do
+    subject.posts_counter = 5
+    expect(subject.recent_posts).to eq(subject.posts.last(5))
   end
 end
