@@ -1,28 +1,36 @@
 class CommentsController < ApplicationController
+  before_action :set_post, only: %i[new create destroy]
+  before_action :set_comment, only: [:destroy]
   load_and_authorize_resource
+
   def new
-    @comment = Comment.new
-    @post = Post.find(params[:post_id])
+    @comment = @post.comments.new
   end
 
   def create
-    @user = current_user
-    @post = Post.find(params[:post_id])
-    @comment = Comment.new(comment_params)
+    @comment = @post.comments.build(comment_params)
     @comment.author = current_user
-    @comment.post = Post.find(params[:post_id])
-    return unless @comment.save
-
-    redirect_to user_post_path(@user, @post)
+    if @comment.save
+      redirect_to user_post_path(current_user, @post), notice: 'Comment was successfully created.'
+    else
+      render :new
+    end
   end
 
   def destroy
-    @comment = Comment.find(params[:id])
     @comment.destroy
-    redirect_to user_post_path(current_user.id, params[:post_id])
+    redirect_to user_post_path(current_user, @post), notice: 'Comment was successfully destroyed.'
   end
 
   private
+
+  def set_post
+    @post = Post.find(params[:post_id])
+  end
+
+  def set_comment
+    @comment = @post.comments.find(params[:id])
+  end
 
   def comment_params
     params.require(:comment).permit(:text)

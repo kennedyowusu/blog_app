@@ -1,43 +1,47 @@
 class PostsController < ApplicationController
   load_and_authorize_resource
 
+  before_action :set_user, only: %i[index show new]
+  before_action :set_post, only: %i[show destroy]
+
   def index
-    @user = User.find(params[:user_id])
     @posts = Post.includes(:likes, :comments)
   end
 
   def show
-    @user = User.find(params[:user_id])
-    @post = Post.includes(:likes, :comments).find(params[:id])
     @likes = @post.likes
   end
 
   def new
-    @user = current_user
-    @post = Post.new
+    @post = @user.posts.new
   end
 
   def create
-    @post = Post.new(post_params)
-    @post.author = current_user
-    @post.likes_counter = 0
-    @post.comments_counter = 0
-    return unless @post.save
+    @post = current_user.posts.new(post_params)
 
-    redirect_to user_posts_path
-    flash[:success] = 'Post created!'
+    if @post.save
+      redirect_to user_posts_path, success: 'Post created!'
+    else
+      render :new
+    end
   end
 
   def destroy
-    @post = current_user.posts.find(params[:id])
     @post.destroy
-    flash[:success] = 'Post deleted!'
-    redirect_to user_posts_path
+    redirect_to user_posts_path, success: 'Post deleted!'
   end
 
   private
 
   def post_params
     params.require(:post).permit(:title, :text)
+  end
+
+  def set_user
+    @user = User.find(params[:user_id])
+  end
+
+  def set_post
+    @post = current_user.posts.find(params[:id])
   end
 end

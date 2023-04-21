@@ -1,1 +1,4 @@
-<%= content_tag :span, "#{comment.author.name} : #{comment.text}" %>
+<%= content_tag :div, class: 'comment', 'aria-label': "#{comment.author.name} said" do %>
+  <%= content_tag :span, comment.author.name, class: 'comment-author' %>
+  <%= content_tag :div, sanitize(comment.text), class: 'comment-text', 'aria-labelledby': "comment-#{comment.id}" %>
+<% end %>
