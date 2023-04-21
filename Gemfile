@@ -50,6 +50,7 @@ gem 'bootsnap', require: false
 
 gem 'devise'
 gem 'letter_opener'
+gem 'cancancan'
 
 # Use Sass to process CSS
 # gem "sassc-rails"
