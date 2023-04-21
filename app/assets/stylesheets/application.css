@@ -1,127 +1,560 @@
 * {
   box-sizing: border-box;
   padding: 0;
-  margin: 0;
-  font-family: "Montserrat", sans-serif;
-  color: black;
+  margin: 0 40px;
 }
 
-.container {
-  margin: 0 auto;
-  width: 30%;
+body {
+  background-color: #f5f5f5;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  color: #333;
+  width: 100%;
+  margin: 0 40px;
 }
 
-h1 {
+.index-homepage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.index-text-link {
+  margin-top: 20px;
   margin-bottom: 20px;
 }
 
-ul {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  list-style: none;
-  margin: 0;
-}
-
-.user,
-.user-details {
-  display: flex;
-  gap: 30px;
-  text-decoration: none;
-}
-
-li:nth-child(even) {
-  background-color: aliceblue;
-}
-
-.userphoto,
-.username {
-  border: 1px solid black;
-}
-
-.userphoto {
+.index-user-photo {
+  height: 115px;
   width: 100px;
-  height: 100px;
+  border: 3px solid black;
+  margin-right: -20px;
 }
 
-.username {
+.index-user-data {
   display: flex;
   flex-direction: column;
-  padding: 2%;
-  width: 70%;
+  width: 30%;
+  border: 2px solid black;
+  padding: 20px;
 }
 
-.username p {
-  margin-top: 30px;
+.user_name {
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
+}
+
+.number_of_post {
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 10px;
+  margin-top: 20px;
+  text-align: end;
+}
+
+.single {
+  width: 100%;
+  margin: 30px auto;
+}
+
+.single-tittle {
+  font-size: 30px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.single-user-image-data {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 20px auto;
+  width: 68%;
 }
 
-a {
-  text-decoration: none;
+.single-user-photo {
+  height: 120px;
+  width: 120px;
+  border: 4px solid black;
+  margin-left: 30px;
+  margin-right: -30px;
 }
 
-.user-details {
+.single-user-image {
+  border-radius: 50%;
+  margin-left: 10px;
+}
+
+.single-user-data {
+  display: flex;
   flex-direction: column;
-  gap: 10px;
 }
 
-.bio,
-.eachpost {
-  border: 1px solid;
-  padding: 2%;
+.single-user-data-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 10px;
+  justify-content: flex-start;
 }
 
 .bio {
+  color: #333;
+  justify-content: center;
+  align-items: center;
+  width: 35.1%;
+  border: 2px solid black;
+  margin: 10px auto 20px auto;
+  padding: 10px;
+}
+
+.bio-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #333;
   margin-bottom: 10px;
+  text-align: start;
 }
 
-.bio h4,
-.eachpost h4 {
-  margin-bottom: 20px;
-}
-
-.eachpost h6,
-.post h6 {
-  text-align: right;
-}
-
-.button {
-  margin: auto;
-  padding: 10px 20px;
+.bio-paragraph {
   font-size: 16px;
-  align-self: center;
-  justify-self: center;
+  font-weight: 400;
+  margin-top: 10px;
 }
 
-.post {
+.single-user-post {
+  width: 93%;
+  margin: 0 auto;
+}
+
+.all-post-button {
+  padding: 10px 30px;
+  margin-top: 20px;
+  margin-left: 570px;
+  background-color: teal;
+  color: white;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.all-post-button:hover {
+  background-color: white;
+  color: teal;
+  border: 1px solid teal;
+}
+
+.specific {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  justify-content: center;
+  align-items: center;
 }
 
-.post div {
-  border: 1px solid;
-  padding: 2%;
-}
-
-.gap {
-  display: flex;
-  gap: 30px;
-}
-
-.form-label {
+.specific-title {
   font-weight: bold;
-  display: block;
-  margin-bottom: 10px;
+  font-size: 18px;
 }
 
-.form-input {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
+.specific-img-post {
+  width: 50%;
+  display: flex;
+  margin-top: 20px;
   margin-bottom: 20px;
+}
+
+.specific-img {
+  height: 100px;
+  width: 100px;
+  border: 3px solid black;
+  margin-right: -10px;
+  margin-left: 30px;
+}
+
+.specific-user-content {
+  display: flex;
+  flex-direction: column;
+  width: 75%;
+  border: 3px solid black;
+}
+
+.specific-post-data {
+  width: 48%;
+}
+
+.specific-post-container {
+  border: 2px solid black;
+  margin: 20px;
+}
+
+.specific-post-title {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: start;
+  margin-left: -10px;
+  margin-top: 10px;
+}
+
+.specific-post-body {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-left: 28px;
+}
+
+.likes-comments-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.post-comments-title {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.comments-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  border: 3px solid black;
+  margin: 0 auto 20px auto;
+  padding: 10px;
+}
+
+.comment-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.comment-like {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+  order: 3;
+}
+
+.comment-text {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-left: -40px;
+  text-align: start;
+}
+
+.comment-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  margin-bottom: 20px;
+}
+
+.each-post-comments {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto 20px auto;
+}
+
+.add-comments {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 0 auto 20px auto;
+}
+
+.add-comment-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.comment-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto 20px auto;
+}
+
+.add-comment-btn {
+  padding: 5px 30px;
+  margin-top: 20px;
+  background-color: teal;
+  color: white;
+  border-radius: 5px;
+  border: 2px solid teal;
+}
+
+.add-comment-btn:hover {
+  background-color: white;
+  color: teal;
+  border: 2px solid teal;
+}
+
+.post-n-comment-n-like {
+  display: flex;
+  margin-left: -30px;
+}
+
+.comment-like-counts {
+  display: flex;
+  justify-content: flex-end;
+  margin-left: 10px;
+}
+
+.comment-body {
+  width: 100%;
+  margin: 0 auto 20px 10px;
+}
+
+.recent-comment-for-posts {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto 20px auto;
+  border: 1px solid black;
+}
+
+.recent-comment-for-post {
+  font-size: 14px;
+  margin: 10px;
+}
+
+.create-post-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.post-title-message {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 140px;
+  width: 60%;
+}
+
+.input-title {
+  border: 2px solid black;
+  margin: 20px;
+  padding: 6px;
+  font-size: 16px;
+}
+
+.input-title:focus {
+  outline: none;
+}
+
+.text-area {
+  border: 2px solid black;
+  height: 100px;
+  margin: 20px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.text-area:focus {
+  outline: none;
+}
+
+.new-post-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.form-label-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.form-label-text-area {
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: -80px;
+}
+
+.new-post {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto 20px auto;
+}
+
+.new-post-button {
+  padding: 8px 30px;
+  margin-top: 20px;
+  margin-left: 20px;
+  background-color: maroon;
+  color: white;
+  border-radius: 5px;
+  border: 2px solid maroon;
+  text-align: center;
+}
+
+.new-post-button:hover {
+  background-color: white;
+  color: maroon;
+  border: 2px solid maroon;
+}
+
+.new-post-btn {
+  margin: 20px auto 20px 160px;
+  font-size: 16px;
+  font-weight: bold;
+  border: 1px solid #000;
+  padding: 10px 20px;
+  border-radius: 5px;
+  width: 56%;
+  text-align: center;
+}
+
+.new-post-btn:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+.single-post-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  margin: 20px auto 20px auto;
+  border: 2px solid black;
+}
+
+.single-post-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto 20px auto;
+  background: white;
+}
+
+.single-post-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 10px auto 20px auto;
+}
+
+.single-post-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0 auto 10px 240px;
+}
+
+.single-post-text {
+  width: 100%;
+  margin: 0 auto 20px 240px;
+}
+
+.single-post-comment {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto 20px auto;
+}
+
+.single-post-like {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto 20px 40px;
+}
+
+.single-post-comment-item {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  width: 50%;
+  margin: 10px auto 20px 235px;
+  border: 1px solid black;
+  padding: 10px;
+}
+
+.single-see-all-post {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  margin: 0 auto 20px auto;
+  border: 2px solid black;
+  padding: 10px;
+  border-radius: 8px;
+  color: black;
+}
+
+.single-see-all-post:hover {
+  background-color: black;
+  color: white;
+}
+
+.single-see-all-post:hover a {
+  color: white;
+}
+
+.post-title-message-comment {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.form-input-comment {
+  border: 2px solid black;
+  height: 100px;
+  margin: 20px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.form-input-comment:focus {
+  outline: none;
+}
+
+.form-button-comment {
+  padding: 8px 30px;
+  margin-top: 20px;
+  margin-left: 60px;
+  background-color: maroon;
+  color: black;
+  border-radius: 5px;
+  border: 2px solid maroon;
+  text-align: center;
+  width: 90%;
+}
+
+.form-button-comment:hover {
+  background-color: black;
+  font-weight: bold;
+  color: white;
+  border: 2px solid black;
 }

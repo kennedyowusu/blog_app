@@ -7,9 +7,7 @@
        %>
     </h2>
     <ul>
-      <% resource.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+      <%= safe_join(resource.errors.full_messages.map { |message| content_tag(:li, message) }) %>
     </ul>
   </div>
 <% end %>

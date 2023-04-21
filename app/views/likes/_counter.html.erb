@@ -1,7 +1,8 @@
 <div>
-  <%= form_with model: Like, url: user_post_likes_path(@user, @post), class: "like-form" do |form| %>
+  <%= form_with model: :like, url: user_post_likes_path(@user, @post), class: "like-form" do |form| %>
     <div>
-      <%= form.submit "Like Post", class: "likes-form" aria-label: "Like this post" %><br>
+      <%= form.button "Like Post", class: "likes-form", "aria-label": "Like this post" %><br>
+      <%= form.hidden_field :authenticity_token, value: form_authenticity_token %>
     </div>
-<% end %>
+  <% end %>
 </div>
