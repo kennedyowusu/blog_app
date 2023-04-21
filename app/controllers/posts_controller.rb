@@ -4,7 +4,17 @@ class PostsController < ApplicationController
   def index
     @user = User.find(params[:user_id])
     @posts = Post.includes(:likes, :comments)
-	@@ -17,16 +19,26 @@ def new
+  end
+
+  def show
+    @user = User.find(params[:user_id])
+    @post = Post.includes(:likes, :comments).find(params[:id])
+    @likes = @post.likes
+  end
+
+  def new
+    @user = current_user
+    @post = Post.new
   end
 
   def create

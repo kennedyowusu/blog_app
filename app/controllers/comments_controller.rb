@@ -3,7 +3,8 @@ class CommentsController < ApplicationController
   def new
     @comment = Comment.new
     @post = Post.find(params[:post_id])
-	@@ -7,8 +8,23 @@ def new
+  end
+
   def create
     @user = current_user
     @post = Post.find(params[:post_id])
