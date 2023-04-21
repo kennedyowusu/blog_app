@@ -47,7 +47,25 @@ RSpec.describe 'root page features' do
     it 'should display the number of comments' do
       expect(page).to have_content(@posts.first.comments_counter)
     end
+​    it 'should display the number of likes' do
+    expect(page).to have_content(@posts.first.likes_counter)
+  end
 ​
+  it 'should display the post body' do
+    expect(page).to have_content(@posts.first.text)
+  end
+​
+  it 'should display the name of the commentor' do
+    @posts.first.comments.each do |comment|
+      expect(page).to have_content(comment.author.name)
+    end
+  end
+​
+  it 'should display each comment left by the commenter' do
+    @posts.first.comments.each do |comment|
+      expect(page).to have_content(comment.body)
+    end
+  endt
    
   end
 end
