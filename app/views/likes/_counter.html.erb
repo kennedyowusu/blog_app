@@ -1,7 +1,7 @@
 <div>
   <%= form_with model: Like, url: user_post_likes_path(@user, @post), class: "like-form" do |form| %>
     <div>
-      <%= form.submit "Like Post", class: "likes-form" %><br>
+      <%= form.submit "Like Post", class: "likes-form" aria-label: "Like this post" %><br>
     </div>
 <% end %>
 </div>
