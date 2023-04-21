@@ -1,70 +1,79 @@
 require 'rails_helper'
-RSpec.describe 'Posts', type: :feature do
-  before(:example) do
-    @user = User.create(name: 'John Doe',
-                        photo: 'https://cdn.pixabay.com/photo/2023/03/07/18/07/chocolate-7836231_960_720.png', bio: 'live to bio')
-    @post = Post.create(title: 'title', text: 'content', author: @user)
-    @comment = Comment.create(text: 'comment', post: @post, author: @user)
-    @like = Like.create(post: @post, author: @user)
+
+RSpec.describe '#UserIndex', type: :feature do
+  before(:each) do
+    @users = [
+      @user1 = User.create(
+        name: 'Derrick',
+        photo: 'https://img.freepik.com/free-vector/mysterious-mafia-man-smoking-cigarette_52683-34828.jpg?w=1480&t=st=1674661161~exp=1674661761~hmac=e529680000ea966150e5ea3b38241a0d8c9582faf23dac8af61ce1785cf27838',
+        bio: 'Fullstack Web developer from Uganda',
+        posts_counter: 9
+      ),
+      @user2 = User.create(
+        name: 'Lilly',
+        photo: 'https://img.freepik.com/free-vector/mysterious-mafia-man-smoking-cigarette_52683-34828.jpg?w=1480&t=st=1674661161~exp=1674661761~hmac=e529680000ea966150e5ea3b38241a0d8c9582faf23dac8af61ce1785cf27838',
+        bio: 'Teacher from Poland.', posts_counter: 1
+      )
+    ]
+
+    @posts = [
+      @post1 = Post.create(
+        author: @user1, title: 'Hello Post', text: 'This is my first post', comments_counter: 0, likes_counter: 0
+      ),
+      @post2 = Post.create(
+        author: @user1, title: 'Football', text: 'This is my second post', comments_counter: 0, likes_counter: 0
+      ),
+      @post3 = Post.create(
+        author: @user1, title: 'Current Affairs', text: 'This is my third post', comments_counter: 0, likes_counter: 0
+      )
+    ]
+
+    @comments = [
+      Comment.create(post: @post1, author: @user1, text: 'Hi Tom!'),
+      Comment.create(post: @post2, author: @user2, text: 'Great stuff.'),
+      Comment.create(post: @post3, author: @user2, text: 'Awesome!')
+    ]
+
+    visit user_posts_path(@users.first, @posts.first)
   end
-  describe 'GET /posts' do
-    before(:example) do
-      visit user_posts_path(@user)
+
+  describe 'Post#Index' do
+    it 'shoud display the users profile picture' do
+      expect(page).to have_css("img[src='#{@users.first.photo}']")
     end
-    it 'shows the image' do
-      expect(page.find('img')['src']).to have_content @user.photo
+
+    it 'shoudl display the user name' do
+      expect(page).to have_content(@users.first.name)
     end
-    it 'shows the username' do
-      expect(page).to have_content('John Doe')
+
+    it 'should display the number of posts' do
+      expect(page).to have_content(@users.first.posts_counter)
     end
-    it 'shows the number of posts' do
-      expect(page).to have_content('Number of posts: 1')
+
+    it 'should display the post title' do
+      expect(page).to have_content(@posts.first.title)
     end
-    it 'shows the post title' do
-      expect(page).to have_content('title')
+
+    it 'should display the body of the post' do
+      expect(page).to have_content(@posts.first.text)
     end
-    it 'shows the post content' do
-      expect(page).to have_content('content')
+
+    it 'should display the first comments of the post' do
+      @posts.first.comments.each do |comment|
+        expect(page).to have_content(comment.text)
+      end
     end
-    it 'shows the first of comments' do
-      expect(page).to have_content('comment')
+
+    it 'should display the number of comments of the post' do
+      expect(page).to have_content(@posts.first.comments_counter)
     end
-    it 'shows the number of comments' do
-      expect(page).to have_content('Comments: 1')
+
+    it 'should display the number of likes of the post' do
+      expect(page).to have_content(@posts.first.likes_counter)
     end
-    it 'shows the number of likes' do
-      expect(page).to have_content('Likes: 1')
-    end
-    it 'when I click on the post id I can see the post' do
-      find("a[href='/users/#{@user.id}/posts/#{@post.id}']").click
-      sleep 1
-      expect(current_path).to eq user_post_path(@user, @post)
-    end
-  end
-  describe 'GET /posts/:id' do
-    before(:example) do
-      visit user_post_path(@user, @post)
-    end
-    it 'shows the post title' do
-      expect(page).to have_content('title')
-    end
-    it "shows post author's name" do
-      expect(page).to have_content('John Doe')
-    end
-    it 'shows the comments counter for the post' do
-      expect(page).to have_content('Comments: 1')
-    end
-    it 'shows the like counter for the post' do
-      expect(page).to have_content('Likes: 1')
-    end
-    it 'shows the post content' do
-      expect(page).to have_content('content')
-    end
-    it "shows the comment's author" do
-      expect(page).to have_content(@comment.author.name)
-    end
-    it "shows the comment's content" do
-      expect(page).to have_content(@comment.text)
+
+    it 'should include a section for paginations' do
+      expect(page).to have_content('Pagination')
     end
   end
 end

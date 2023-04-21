@@ -1,11 +1,11 @@
 class Like < ApplicationRecord
   belongs_to :author, class_name: 'User'
-  belongs_to :post, counter_cache: true
-  after_commit :update_post_likes_counter, on: %i[create destroy]
+  belongs_to :post
 
-  private
+  after_create :update_likes_counter
+  after_destroy :update_likes_counter
 
-  def update_post_likes_counter
-    post.update_column(:likes_counter, post.likes_count)
+  def update_likes_counter
+    post.update(likes_counter: post.likes.count)
   end
 end

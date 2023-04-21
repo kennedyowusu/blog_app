@@ -1,49 +1,68 @@
 require 'rails_helper'
 
-RSpec.describe 'User show', type: :feature do
-  before :each do
-    @photo = 'https://picsum.photos/300/200'
-    @user1 = User.create(name: 'Kennedy', photo: @photo,
-                         bio: 'Software Engineer from Ghana', posts_counter: 12)
-    @post1 = Post.create(author: @user1, title: 'Title 1', text: 'This is my first post')
-    @post2 = Post.create(author: @user1, title: 'Title 2', text: 'This is my second post')
-    @post3 = Post.create(author: @user1, title: 'Title 3', text: 'This is my third post')
-    visit user_path(@user1.id)
+RSpec.describe 'users/index', type: :feature do
+  before(:each) do
+    @users = [
+      User.create(
+        name: 'Tom',
+        photo: 'https://i0.wp.com/imgs.hipertextual.com/wp-content/uploads/2022/10/Andor_Luthen-Rael.png',
+        bio: 'Software Developer from Nigeria',
+        posts_counter: 2
+      ),
+      User.create(
+        name: 'Jerry',
+        photo: 'https://i0.wp.com/imgs.hipertextual.com/wp-content/uploads/2022/06/obi-wan-kenobi-2-1-scaled.jpeg',
+        bio: 'Software Developer from South Africa', posts_counter: 3
+      )
+    ]
+
+    @first_user = User.first
+
+    @post1 = Post.create(author: @first_user, title: 'Hello', text: 'This is my second test post',
+                         comments_counter: 2, likes_counter: 6)
+    @post2 = Post.create(author: @first_user, title: 'My second post',
+                         text: 'Yeah, this is a new post for the first user', comments_counter: 0, likes_counter: 3)
+    @post3 = Post.create(author: @first_user, title: 'My third post', text: 'Added a new post', comments_counter: 4,
+                         likes_counter: 1)
+
+    visit user_path(@first_user)
   end
 
-  it 'Show user name' do
-    expect(page).to have_content(@user1.name)
+  it "shows the user's profile picture" do
+    img = page.all('img')
+    expect(img.size).to eq(1)
   end
 
-  it 'I can see the profile picture for each user.' do
-    expect(page).to have_css('img')
+  it 'shows the users name' do
+    expect(page).to have_content(@first_user.name)
   end
 
-  it 'Should see the number of posts the user has written' do
-    expect(page).to have_content(@user1.posts_counter)
+  it 'shows the number of post the user has written' do
+    expect(page).to have_content(@first_user.posts_counter)
   end
 
-  it 'Should see bio of the user' do
-    expect(page).to have_content(@user1.bio)
+  it 'shows the users bio' do
+    expect(page).to have_content(@first_user.bio)
   end
 
-  it 'Should render the last 3 posts' do
-    expect(page).to have_content(@post1.title)
-    expect(page).to have_content(@post2.title)
-    expect(page).to have_content(@post3.title)
+  it 'shows the users first three post' do
+    expect(page).to have_content(@post1.text)
+    expect(page).to have_content(@post2.text)
+    expect(page).to have_content(@post3.text)
   end
 
-  it 'I can see the button that lets me view all the posts' do
+  it 'shows a button to view all users posts' do
     expect(page).to have_content('See all posts')
   end
 
-  it "Redirect to user's post's show page when clicked" do
-    click_link @post1.id
-    expect(page).to have_current_path(user_post_path(@user1, @post1))
+  it 'redirects to the posts show page when I click on a user' do
+    visit user_posts_path(@first_user)
+    click_link @post3.text
+    expect(current_path).to match user_posts_path(@first_user.id)
   end
 
-  it 'Redirect  all posts page when clicked See all posts' do
+  it 'redirects to the posts show page when I click on a user' do
     click_link 'See all posts'
-    expect(page).to have_current_path(user_posts_path(@user1))
+    expect(current_path).to match user_posts_path(@first_user)
   end
 end

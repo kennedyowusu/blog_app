@@ -1,23 +1,23 @@
-<section class="new-post">
-  <h2 class="new-post-title">New Post</h2>
-  <% if @post.errors.any? %>
-    <div class="error-message">
-      <% @post.errors.full_messages.each do |message| %>
-      <p><%= message %></p>
-      <% end %>
-    </div>
-  <% end %>
+<section>
+    <h2>New post</h2>
+    <% if @post.errors.any? %>
+        <div>
+            <% @post.errors.full_messages.each do |message| %>
+               <p> <%= message %> </p>
+            <% end %>
+        </div>
+    <% end %>
 
-  <div class="post-title-message">
     <%= form_with model: @post, url: user_posts_path(@user) do |form| %>
-    <div class="post-title-message">
-      <%= form.text_field :title, required: true, autofocus: true, class: "input-title", placeholder: "Enter your title" %>
-    </div>
+        <div>
+            <%= form.label :title, class: 'form-label' %>
+            <%= form.text_field :title, required: true, autofocus: true, class: 'form-input' %>
+        </div>
 
-    <div class="post-title-message">
-      <%= form.text_area :text, required: true, autofocus: true, class: "text-area", placeholder: "Enter your text here" %>
-    </div>
-    <%= form.submit "Submit Post", class: "new-post-btn" %>
-  <% end %>
-  </div>
+        <div>
+            <%= form.label :text, class: 'form-label' %>
+            <%= form.text_field :text, required: true, autofocus: true, class: 'form-input' %>
+        </div>
+        <%= form.submit "submit" %>
+    <% end %>
 </section>

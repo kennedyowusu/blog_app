@@ -1,41 +1,37 @@
 require 'rails_helper'
+
 RSpec.describe User, type: :model do
-  let(:user) { User.create(name: 'Alice') }
-  let(:post1) { Post.create(title: 'Post 1', text: 'Post body', author: user) }
-  let(:post2) { Post.create(title: 'Post 2', text: 'Post body', author: user) }
-  let(:post3) { Post.create(title: 'Post 3', text: 'Post body', author: user) }
-  let(:comment1) { Comment.create(author: user, post: post1, text: 'Comment body') }
-  let(:comment2) { Comment.create(author: user, post: post2, text: 'Comment body') }
-  let(:like1) { Like.create(author: user, post: post1) }
-  let(:like2) { Like.create(author: user, post: post2) }
+  subject do
+    User.new(
+      name: 'John Doe',
+      photo: 'https://picsum.photos/200/300',
+      bio: 'Developer',
+      posts_counter: 5
+    )
+  end
+  before { subject.save }
 
-  describe 'validations' do
-    it 'validates presence of name' do
-      user = User.new(posts_counter: 0)
-      expect(user).not_to be_valid
-      expect(user.errors[:name]).to include("can't be blank")
-    end
-
-    it 'validates numericality of posts_counter' do
-      user = User.new(name: 'John', posts_counter: 'not a number')
-      expect(user).not_to be_valid
-      expect(user.errors[:posts_counter]).to include('is not a number')
-
-      user.posts_counter = -1
-      expect(user).not_to be_valid
-      expect(user.errors[:posts_counter]).to include('must be greater than or equal to 0')
-
-      user.posts_counter = 0
-      expect(user).to be_valid
-    end
+  it 'is valid with valid attributes' do
+    expect(subject).to be_valid
   end
 
-  describe '#get_recent_posts' do
-    it 'returns the most recent posts up to the given count' do
-      post1
-      post2
-      post3
-      expect(user.recent_posts.take(1)).to eq([post3])
-    end
+  it 'is not valid without a name' do
+    subject.name = nil
+    expect(subject).to_not be_valid
+  end
+
+  it 'is not valid with a negative posts counter' do
+    subject.posts_counter = -1
+    expect(subject).to_not be_valid
+  end
+
+  it 'is not valid with a non-integer posts counter' do
+    subject.posts_counter = 1.5
+    expect(subject).to_not be_valid
+  end
+
+  it 'should display most recent posts' do
+    subject.posts_counter = 5
+    expect(subject.recent_posts).to eq(subject.posts.last(5))
   end
 end

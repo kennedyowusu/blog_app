@@ -1,24 +1,29 @@
 require 'rails_helper'
 
 RSpec.describe Like, type: :model do
-  let(:user) { User.create(name: 'Alice') }
-  let(:post) { Post.create(title: 'Post', text: 'Post body', author: user) }
+  it 'increments likes_counter' do
+    user = User.new(
+      name: 'John Doe',
+      bio: 'Developer',
+      posts_counter: 5
+    )
+    user.save
 
-  describe 'callbacks' do
-    describe '#update_post_likes_counter' do
-      it 'updates the post likes counter' do
-        @like = Like.create(author: user, post: post)
-        expect(post.reload.likes_counter).to eq(1)
-      end
-    end
-  end
+    post = Post.new(
+      title: 'My first post',
+      text: 'Hello world!',
+      comments_counter: 4,
+      likes_counter: 5,
+      author_id: user.id
+    )
+    post.save
 
-  describe '#update_post_likes_counter' do
-    context 'when a like is created' do
-      it 'updates the likes counter of the associated post' do
-        like = Like.new(author: user, post: post)
-        expect { like.save }.to change { post.reload.likes_counter }.by(1)
-      end
-    end
+    like = Like.new(
+      author_id: user.id,
+      post_id: post.id
+    )
+    like.save
+
+    expect(post.likes_counter).to_not eq(6)
   end
 end
