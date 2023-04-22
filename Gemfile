@@ -51,6 +51,7 @@ gem 'bootsnap', require: false
 gem 'cancancan'
 gem 'devise'
 gem 'letter_opener'
+gem 'rswag'
 
 # Use Json Web Token (JWT) for token based authentication
 gem 'jwt'
